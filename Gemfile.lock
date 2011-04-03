@@ -1,0 +1,37 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    diff-lcs (1.1.2)
+    ffi (1.0.7)
+      rake (>= 0.8.7)
+    ffi (1.0.7-java)
+    git (1.2.5)
+    jeweler (1.5.2)
+      bundler (~> 1.0.0)
+      git (>= 1.2.5)
+      rake
+    rake (0.8.7)
+    rake-compiler (0.7.6)
+      rake
+    rcov (0.9.9)
+    rcov (0.9.9-java)
+    rspec (2.3.0)
+      rspec-core (~> 2.3.0)
+      rspec-expectations (~> 2.3.0)
+      rspec-mocks (~> 2.3.0)
+    rspec-core (2.3.1)
+    rspec-expectations (2.3.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.3.0)
+
+PLATFORMS
+  java
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.0.0)
+  ffi
+  jeweler (~> 1.5.2)
+  rake-compiler
+  rcov
+  rspec (~> 2.3.0)

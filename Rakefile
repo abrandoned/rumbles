@@ -10,24 +10,29 @@ end
 require 'rake'
 
 require 'jeweler'
-Jeweler::Tasks.new do |gem|
+
+jeweler_tasks = Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "rumrum"
-  gem.homepage = "http://github.com/bdewitt/rumrum"
+  gem.name = "rumbles"
+  gem.homepage = "http://github.com/bdewitt/rumbles"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "brandon@myjibe.com"
+  gem.summary = %Q{ one-line summary of your gem}
+  gem.description = %Q{ longer description of your gem}
+  gem.email = "brandon+rumbles@myjibe.com"
   gem.authors = ["Brandon Dewitt"]
+  gem.extensions = FileList['ext/**/extconf.rb']
+  gem.version = File.read('VERSION')
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
+  gem.add_runtime_dependency 'ffi'
   #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
 Jeweler::RubygemsDotOrgTasks.new
+$gemspec = jeweler_tasks.gemspec
 
 require 'rspec/core'
 require 'rspec/core/rake_task'
+
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = FileList['spec/**/*_spec.rb']
 end
@@ -44,7 +49,36 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "rumrum #{version}"
+  rdoc.title = "rumbles #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+$gemspec.version = jeweler_tasks.jeweler.version
+
+require 'rake/extensiontask'
+
+Rake::ExtensionTask.new do |ext|
+  ext.name = "libmurmur1"
+  ext.ext_dir = "ext/libmurmur1"
+  ext.lib_dir = "lib/rumbles/ffi_murmur/lib"
+  ext.tmp_dir = "tmp"
+  ext.gem_spec = $gemspec
+end
+
+Rake::ExtensionTask.new do |ext|
+  ext.name = "libmurmur2"
+  ext.ext_dir = "ext/libmurmur2"
+  ext.lib_dir = "lib/rumbles/ffi_murmur/lib"
+  ext.tmp_dir = "tmp"
+  ext.gem_spec = $gemspec
+end
+
+Rake::ExtensionTask.new do |ext|
+  ext.name = "libmurmur3"
+  ext.ext_dir = "ext/libmurmur3"
+  ext.lib_dir = "lib/rumbles/ffi_murmur/lib"
+  ext.tmp_dir = "tmp"
+  ext.gem_spec = $gemspec
+end
+
